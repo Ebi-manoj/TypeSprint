@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --primary-color: #f8e147;
+  --font-heading: 'Kaushan Script', serif;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  font-size: 62.5%;
+}
+
+.container {
+  padding: 5% 10%;
+}
+.heading {
+  display: flex;
+  align-items: center;
+}
+.heading p {
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.heading img {
+  mix-blend-mode: multiply;
+  width: 60px;
+}
+/* .......................................................................................................... */
+#typing-test {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.target-text {
+  font-size: 1.5rem;
+  line-height: 2;
+  letter-spacing: 0.1rem;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
+
+.cursor {
+  background-color: lightblue;
+  border-radius: 3px;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+
+input {
+  margin-top: 20px;
+  font-size: 1rem;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+}
