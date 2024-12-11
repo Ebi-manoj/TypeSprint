@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log             # Ignore log files (e.g., error.log)
+npm-debug.log*    # Ignore npm debug logs
+yarn-debug.log*   # Ignore Yarn debug logs
+yarn-error.log*
+.DS_Store         # macOS system files
+*.bak             # Backup files
+.idea/            # IDE settings (e.g., WebStorm, PhpStorm)
+.vscode/          # Visual Studio Code settings
+dist/   
