@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  padding: 5% 10%;
+  padding: 5% 10% 0%;
 }
 .heading {
   display: flex;
@@ -47,6 +47,7 @@ body {
   margin: 2rem auto 0 auto;
   color: var(--primary-color);
   position: relative;
+  z-index: 2;
 }
 .settings,
 .settings ul {
@@ -65,7 +66,8 @@ body {
   font-size: 14px;
 }
 .settings li:hover,
-.btn-lang:hover {
+.btn-lang:hover,
+.reset i:hover {
   color: white;
 }
 .setting-display::after {
@@ -108,7 +110,7 @@ body {
 }
 
 .cursor {
-  background-color: lightblue;
+  background-color: #7c7b7b74;
   border-radius: 3px;
   animation: blink 0.8s steps(1) infinite;
 }
@@ -123,7 +125,32 @@ input {
   margin-top: 20px;
   font-size: 1rem;
   padding: 10px;
-  width: 100%;
+  width: 10%;
+  height: 2px;
   box-sizing: border-box;
-  opacity: 1;
+  /* opacity: 0; */
+  cursor: default;
+  position: absolute;
+  top: 24%;
+  left: 44%;
+  z-index: 1;
+}
+
+#typing-test .reset {
+  margin-top: 0.8rem;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #1109097a;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer p span {
+  font-size: 10px;
+  margin-left: 2px;
 }
