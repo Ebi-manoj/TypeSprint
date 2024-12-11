@@ -1,4 +1,5 @@
-const targetText = 'The quick brown fox jumps over the lazy dog.';
+const targetText =
+  'The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.';
 const targetElement = document.getElementById('target-text');
 const inputElement = document.getElementById('user-input');
 

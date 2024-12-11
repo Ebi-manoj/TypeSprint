@@ -5,12 +5,13 @@
   box-sizing: border-box;
 }
 :root {
-  --primary-color: #f8e147;
+  --bg-color: #f8e147;
   --font-heading: 'Kaushan Script', serif;
   --font-basic: 'Poppins', serif;
+  --primary-color: #2d2d2d;
 }
 body {
-  background-color: var(--primary-color);
+  background-color: var(--bg-color);
   font-family: var(--font-basic);
   font-size: 62.5%;
   width: 100%;
@@ -36,6 +37,17 @@ body {
   mix-blend-mode: multiply;
   width: 60px;
 }
+.settings {
+  background-color: #b8a001;
+  border-radius: 4rem;
+  width: 450px;
+  justify-content: space-between;
+  align-self: center;
+  padding: 10px 30px;
+  margin: 2rem auto 0 auto;
+  color: var(--primary-color);
+  position: relative;
+}
 .settings,
 .settings ul {
   display: flex;
@@ -45,34 +57,50 @@ body {
 }
 .settings ul li {
   margin: 0 7px;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 .settings li i {
   margin-right: 7px;
   font-size: 14px;
 }
-.settings {
-  background-color: #b8a001;
-  border-radius: 4rem;
-  width: 450px;
-  justify-content: space-between;
-  align-self: center;
-  padding: 10px 30px;
-  margin: 2rem auto 0 auto;
+.settings li:hover,
+.btn-lang:hover {
+  color: white;
+}
+.setting-display::after {
+  content: '';
+  background-color: var(--primary-color);
+  width: 5px;
+  border-radius: 3px;
+  margin-left: 1.4rem;
+}
+.btn-lang {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.btn-lang i {
+  margin-right: 5px;
 }
 /* .......................................................................................................... */
 #typing-test {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: var(--font-basic);
+  margin: 30px 20px;
 }
 
 .target-text {
   font-size: 1.5rem;
   line-height: 2;
   letter-spacing: 0.1rem;
+  color: #1109097a;
+  font-weight: 600;
 }
 
 .correct {
-  color: green;
+  color: #ffffff;
 }
 
 .incorrect {
@@ -97,5 +125,5 @@ input {
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
-  opacity: 0;
+  opacity: 1;
 }
