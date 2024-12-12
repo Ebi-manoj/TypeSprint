@@ -8,8 +8,7 @@ const inputElement = document.getElementById('user-input');
 const overlay = document.querySelector('.overlay');
 const btnReset = document.querySelector('.fa-arrow-rotate-right');
 
-const targetText =
-  'The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.The quick brown fox jumps over the lazy dog.';
+let targetText;
 ////////////////////////////////////////////////////
 const highlightText = function () {
   const userInput = inputElement.value;
@@ -36,6 +35,7 @@ const highlightText = function () {
   }
 };
 const startText = function () {
+  targetText = faker.lorem.sentence(20);
   // Initialize target text with each character wrapped in a span
   targetElement.innerHTML = targetText
     .split('')
@@ -60,13 +60,15 @@ overlay.addEventListener('click', function () {
   inputElement.focus();
   this.classList.add('hidden');
 });
-
+document.getElementById('typing-test').addEventListener('click', () => {
+  inputElement.focus();
+});
 ///////////////////////////////////////
 ////Restart functionality
 
 btnReset.addEventListener('click', e => {
   inputElement.focus();
   inputElement.value = '';
-  highlightText();
+  startText();
 });
 console.log(faker.lorem.sentence());
