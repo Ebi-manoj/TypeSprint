@@ -60,9 +60,7 @@ overlay.addEventListener('click', function () {
   inputElement.focus();
   this.classList.add('hidden');
 });
-document.getElementById('typing-test').addEventListener('click', () => {
-  inputElement.focus();
-});
+
 ///////////////////////////////////////
 ////Restart functionality
 
@@ -71,4 +69,21 @@ btnReset.addEventListener('click', e => {
   inputElement.value = '';
   startText();
 });
-console.log(faker.lorem.sentence());
+//////////////////////////////////////////////////////////////
+const addActiveSettings = function (element, e) {
+  const targetLi = e.target.closest('li');
+  if (!targetLi) return;
+  document
+    .querySelectorAll(element)
+    .forEach(li => li.classList.remove('active'));
+  targetLi.classList.add('active');
+};
+const ParentElsetting = document.querySelector('.setting-display');
+const ParentElconfig = document.querySelector('.setting-config');
+
+ParentElsetting.addEventListener('click', function (e) {
+  addActiveSettings('.setting-display li', e);
+});
+ParentElconfig.addEventListener('click', function (e) {
+  addActiveSettings('.setting-config li', e);
+});

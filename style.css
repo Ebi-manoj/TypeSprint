@@ -184,3 +184,6 @@ footer p span {
 .hidden {
   visibility: hidden;
 }
+.active {
+  color: white;
+}
