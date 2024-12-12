@@ -34,8 +34,8 @@ const highlightText = function () {
     cursorElement.classList.add('cursor');
   }
 };
-const startText = function () {
-  targetText = faker.lorem.sentence(20);
+const startText = function (word = 25) {
+  targetText = faker.lorem.sentence(word);
   // Initialize target text with each character wrapped in a span
   targetElement.innerHTML = targetText
     .split('')
@@ -83,6 +83,19 @@ const ParentElconfig = document.querySelector('.setting-config');
 
 ParentElsetting.addEventListener('click', function (e) {
   addActiveSettings('.setting-display li', e);
+  if (e.target.classList.contains('word-set')) {
+    inputElement.focus();
+    ParentElconfig.insertAdjacentHTML(
+      'afterbegin',
+      `
+          <li class="active">10</li>
+          <li>25</li>
+          <li>50</li>
+          <li>100</li>
+    `
+    );
+    startText(10);
+  }
 });
 ParentElconfig.addEventListener('click', function (e) {
   addActiveSettings('.setting-config li', e);

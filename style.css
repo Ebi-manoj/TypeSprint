@@ -172,6 +172,8 @@ footer p span {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  transition: opacity 2s ease-out 1s;
 }
 .overlay-text {
   font-size: 0.8rem;
@@ -183,6 +185,7 @@ footer p span {
 }
 .hidden {
   visibility: hidden;
+  opacity: 0;
 }
 .active {
   color: white;
