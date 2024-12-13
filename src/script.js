@@ -12,10 +12,13 @@ let targetText;
 let wordCount = 10;
 let startedTime;
 let mispelled = 0;
+let timeOn = false;
+let countDown;
+let timeFinished = false;
+let mispelledHistory = {};
 ////////////////////////////////////////////////////
 const highlightText = function () {
   const userInput = inputElement.value;
-  mispelled = 0;
 
   // Reset styles for all characters
   [...targetElement.children].forEach(charElement => {
@@ -27,9 +30,15 @@ const highlightText = function () {
     const charElement = document.getElementById(`char-${i}`);
     if (userInput[i] === targetText[i]) {
       charElement.classList.add('correct');
+      if (mispelledHistory[i]) {
+        delete mispelledHistory[i];
+      }
     } else {
+      if (!mispelledHistory[i]) {
+        mispelledHistory[i] = true;
+        mispelled++;
+      }
       charElement.classList.add('incorrect');
-      mispelled++;
     }
   }
 
@@ -39,13 +48,20 @@ const highlightText = function () {
     cursorElement.classList.add('cursor');
   }
   //display result
-  if (userInput.length === targetText.length) {
+  if (!timeOn) {
+    if (userInput.length === targetText.length) {
+      displayResult(userInput.length);
+    }
+  }
+  if (timeOn && timeFinished) {
     displayResult(userInput.length);
+    timeFinished = false;
   }
 };
 const startText = function () {
   startedTime = Date.now();
   mispelled = 0;
+  inputElement.classList.remove('hidden');
   targetText = faker.lorem.sentence(wordCount);
   // Initialize target text with each character wrapped in a span
   targetElement.innerHTML = targetText
@@ -83,6 +99,9 @@ btnReset.forEach(btn =>
     inputElement.focus();
     inputElement.value = '';
     startText();
+    if (timeOn) {
+      startTimer();
+    }
   })
 );
 //////////////////////////////////////////////////////////////
@@ -100,9 +119,11 @@ const ParentElconfig = document.querySelector('.setting-config');
 const settingsConfigFunction = function (html) {
   ParentElconfig.innerHTML = '';
   ParentElconfig.insertAdjacentHTML('afterbegin', html);
-  const activeConfig = document.querySelector('.setting-config li.active');
-  const configValue = +activeConfig.textContent;
-  wordCount = configValue;
+  if (!timeOn) {
+    const activeConfig = document.querySelector('.setting-config li.active');
+    const configValue = +activeConfig.textContent;
+    wordCount = configValue;
+  }
   startText();
 };
 
@@ -113,26 +134,55 @@ ParentElsetting.addEventListener('click', function (e) {
           <li class="word-config">25</li>
           <li class="word-config">50</li>
           <li class="word-config">100</li>`;
+    timeOn = false;
+    timeFinished = false;
     settingsConfigFunction(html);
   }
   if (e.target.classList.contains('time-set')) {
-    const html = ` <li class="time-config active">10</li>
+    const html = ` <li class="time-config active">15</li>
           <li class="time-config">30</li>
           <li class="time-config">60</li>
           <li class="time-config">120</li>`;
+    timeOn = true;
+    wordCount = 25;
+    countDown = 15;
     settingsConfigFunction(html);
+    startTimer();
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
   addActiveSettings('.setting-config li', e);
   if (e.target.classList.contains('word-config')) {
-    const value = +e.target.textContent;
-    if (value) {
-      wordCount = value;
-      startText();
-    }
+    const value = e.target.textContent;
+    wordCount = +value;
+    startText();
+  }
+  if (e.target.classList.contains('time-config')) {
+    const value = e.target.textContent;
+    countDown = +value;
+    startText();
+    startTimer();
   }
 });
+let timerInterval;
+const startTimer = function () {
+  let remainingTime = countDown;
+
+  clearInterval(timerInterval);
+
+  // Start the timer
+  timerInterval = setInterval(() => {
+    if (remainingTime > 0) {
+      console.log(`Time Left: ${remainingTime}s`);
+      remainingTime--;
+    } else {
+      clearInterval(timerInterval);
+      timeFinished = true;
+      console.log('Time Finished!');
+    }
+  }, 1000);
+};
+
 const wpmText = document.querySelector('.wpm-res');
 const accuracyText = document.querySelector('.accuracy-res');
 const timeText = document.querySelector('.time-res');
@@ -140,6 +190,7 @@ const timeText = document.querySelector('.time-res');
 //////////////////////////////////////
 // display result
 function displayResult(inputLength) {
+  inputElement.classList.add('hidden');
   // calculate the wpm
   const timeDiff = Date.now() - startedTime;
   const timeInMin = timeDiff / (1000 * 60);
