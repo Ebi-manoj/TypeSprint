@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 const targetElement = document.getElementById('target-text');
 const inputElement = document.getElementById('user-input');
 const overlay = document.querySelector('.overlay');
-const btnReset = document.querySelector('.fa-arrow-rotate-right');
+const btnReset = document.querySelectorAll('.fa-arrow-rotate-right');
 
 let targetText;
 let wordCount = 10;
@@ -76,12 +76,15 @@ overlay.addEventListener('click', function () {
 
 ///////////////////////////////////////
 ////Restart functionality
-
-btnReset.addEventListener('click', e => {
-  inputElement.focus();
-  inputElement.value = '';
-  startText();
-});
+const showResult = document.querySelector('.result');
+btnReset.forEach(btn =>
+  btn.addEventListener('click', e => {
+    showResult.classList.add('hidden');
+    inputElement.focus();
+    inputElement.value = '';
+    startText();
+  })
+);
 //////////////////////////////////////////////////////////////
 const addActiveSettings = function (element, e) {
   const targetLi = e.target.closest('li');
@@ -123,6 +126,9 @@ ParentElconfig.addEventListener('click', function (e) {
     startText();
   }
 });
+const wpmText = document.querySelector('.wpm-res');
+const accuracyText = document.querySelector('.accuracy-res');
+const timeText = document.querySelector('.time-res');
 
 //////////////////////////////////////
 // display result
@@ -138,4 +144,8 @@ function displayResult(inputLength) {
   console.log(`Time taken ${timeInSec.toFixed(2)}`);
   console.log(`WPM ${WPM}`);
   console.log(`Accuracy ${accuracy.toFixed(2)}`);
+  wpmText.textContent = WPM;
+  accuracyText.textContent = accuracy.toFixed(2);
+  timeText.textContent = timeInSec.toFixed(2);
+  showResult.classList.remove('hidden');
 }
