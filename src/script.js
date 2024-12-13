@@ -44,6 +44,8 @@ const startText = function (word = 25) {
   inputElement.addEventListener('input', () => {
     highlightText();
   });
+  inputElement.value = '';
+  inputElement.focus();
 };
 startText();
 
@@ -90,20 +92,21 @@ ParentElsetting.addEventListener('click', function (e) {
     ParentElconfig.insertAdjacentHTML(
       'afterbegin',
       `
-          <li class="active">10</li>
-          <li>25</li>
-          <li>50</li>
-          <li>100</li>
+          <li class="word-config active">10</li>
+          <li class="word-config">25</li>
+          <li class="word-config">50</li>
+          <li class="word-config">100</li>
     `
     );
-    const activeConfigValue = document.querySelector(
-      '.setting-config li.active'
-    ).textContent;
-    console.log(activeConfigValue);
-
-    startText(Number(activeConfigValue));
+    const activeConfig = document.querySelector('.setting-config li.active');
+    const configValue = +activeConfig.textContent;
+    startText(configValue);
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
   addActiveSettings('.setting-config li', e);
+  const value = +e.target.textContent;
+  if (value) {
+    startText(value);
+  }
 });
