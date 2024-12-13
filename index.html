@@ -17,35 +17,53 @@
         <span><img src="images/logo.jpg" alt="logo" /></span>
         <p>Type Sprint</p>
       </div>
-      <div class="settings">
-        <ul class="setting-display">
-          <li class="time-set"><i class="fa-solid fa-clock"></i>time</li>
-          <li class="word-set"><i class="fa-solid fa-a word-set"></i>words</li>
-          <li class="custom-set">
-            <i class="fa-solid fa-wrench custom-set"></i>custom
-          </li>
-        </ul>
-        <ul class="setting-config"></ul>
-      </div>
-      <p class="btn-lang">
-        <a href=""><i class="fa-solid fa-earth-americas"></i>English</a>
-      </p>
-      <div id="typing-test">
-        <input
-          type="text"
-          id="user-input"
-          placeholder="Start typing..."
-          autofocus
-          autocomplete="off"
-        />
-        <p id="target-text" class="target-text"></p>
-        <div class="overlay hidden">
-          <p class="overlay-text">
-            <i class="fa-solid fa-arrow-pointer"></i>Click here to Focus
-          </p>
+      <div class="content-layout">
+        <div class="settings">
+          <ul class="setting-display">
+            <li class="time-set"><i class="fa-solid fa-clock"></i>time</li>
+            <li class="word-set">
+              <i class="fa-solid fa-a word-set"></i>words
+            </li>
+            <li class="custom-set">
+              <i class="fa-solid fa-wrench custom-set"></i>custom
+            </li>
+          </ul>
+          <ul class="setting-config"></ul>
+        </div>
+        <p class="btn-lang">
+          <a href=""><i class="fa-solid fa-earth-americas"></i>English</a>
+        </p>
+        <div id="typing-test">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Start typing..."
+            autofocus
+            autocomplete="off"
+          />
+          <p id="target-text" class="target-text"></p>
+          <div class="overlay hidden">
+            <p class="overlay-text">
+              <i class="fa-solid fa-arrow-pointer"></i>Click here to Focus
+            </p>
+          </div>
+        </div>
+        <p class="reset"><i class="fa-solid fa-arrow-rotate-right"></i></p>
+        <div class="result">
+          <h1>Your Result!</h1>
+          <div class="result-category">
+            <h3>WPM</h3>
+            <p>:</p>
+            <h2 class="wpm-res">0</h2>
+            <h3>Accuracy</h3>
+            <p>:</p>
+            <h2 class="accuracy-res">0</h2>
+            <h3>Time taken</h3>
+            <p>:</p>
+            <h2 class="time-res">0</h2>
+          </div>
         </div>
       </div>
-      <p class="reset"><i class="fa-solid fa-arrow-rotate-right"></i></p>
     </div>
     <footer>
       <p class="copy-right">&copy;<span>Crafted with💝by Ebi Manoj</span></p>

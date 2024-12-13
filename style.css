@@ -190,3 +190,46 @@ footer p span {
 .active {
   color: white;
 }
+
+/* .......RESULT WINDOW */
+.content-layout {
+  height: auto;
+  width: auto;
+  position: relative;
+}
+.result {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #b8a001;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+  margin: 0 auto;
+  color: white;
+}
+.result h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+.result-category {
+  margin: 1rem auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+  grid-row: 3;
+  gap: 0;
+}
+.result-category h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.result-category p {
+  font-size: 1rem;
+  margin-left: 2rem;
+}
