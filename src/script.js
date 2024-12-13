@@ -9,6 +9,8 @@ const overlay = document.querySelector('.overlay');
 const btnReset = document.querySelector('.fa-arrow-rotate-right');
 
 let targetText;
+let wordCount = 10;
+let startedTime;
 ////////////////////////////////////////////////////
 const highlightText = function () {
   const userInput = inputElement.value;
@@ -33,9 +35,16 @@ const highlightText = function () {
     const cursorElement = document.getElementById(`char-${userInput.length}`);
     cursorElement.classList.add('cursor');
   }
+  //display result
+  if (userInput.length === targetText.length) {
+    displayResult(userInput.length);
+  }
 };
-const startText = function (word = 25) {
-  targetText = faker.lorem.sentence(word);
+const startText = function () {
+  startedTime = Date.now();
+  console.log(startedTime);
+
+  targetText = faker.lorem.sentence(wordCount);
   // Initialize target text with each character wrapped in a span
   targetElement.innerHTML = targetText
     .split('')
@@ -100,13 +109,24 @@ ParentElsetting.addEventListener('click', function (e) {
     );
     const activeConfig = document.querySelector('.setting-config li.active');
     const configValue = +activeConfig.textContent;
-    startText(configValue);
+    wordCount = configValue;
+    startText();
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
   addActiveSettings('.setting-config li', e);
   const value = +e.target.textContent;
   if (value) {
-    startText(value);
+    wordCount = value;
+    startText();
   }
 });
+
+//////////////////////////////////////
+// display result
+function displayResult(inputLength) {
+  const timeDiff = Date.now() - startedTime;
+  const timeInMin = timeDiff / (1000 * 60);
+  const WPM = Math.round(inputLength / 5 / timeInMin);
+  console.log(WPM);
+}
