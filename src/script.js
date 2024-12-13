@@ -11,9 +11,11 @@ const btnReset = document.querySelector('.fa-arrow-rotate-right');
 let targetText;
 let wordCount = 10;
 let startedTime;
+let mispelled = 0;
 ////////////////////////////////////////////////////
 const highlightText = function () {
   const userInput = inputElement.value;
+  mispelled = 0;
 
   // Reset styles for all characters
   [...targetElement.children].forEach(charElement => {
@@ -27,6 +29,7 @@ const highlightText = function () {
       charElement.classList.add('correct');
     } else {
       charElement.classList.add('incorrect');
+      mispelled++;
     }
   }
 
@@ -42,8 +45,7 @@ const highlightText = function () {
 };
 const startText = function () {
   startedTime = Date.now();
-  console.log(startedTime);
-
+  mispelled = 0;
   targetText = faker.lorem.sentence(wordCount);
   // Initialize target text with each character wrapped in a span
   targetElement.innerHTML = targetText
@@ -125,8 +127,15 @@ ParentElconfig.addEventListener('click', function (e) {
 //////////////////////////////////////
 // display result
 function displayResult(inputLength) {
+  // calculate the wpm
   const timeDiff = Date.now() - startedTime;
   const timeInMin = timeDiff / (1000 * 60);
-  const WPM = Math.round(inputLength / 5 / timeInMin);
-  console.log(WPM);
+  const timeInSec = timeDiff / 1000;
+  const standardOfTyping = 5;
+  const WPM = Math.round(inputLength / standardOfTyping / timeInMin);
+  // calculating the accuracy
+  const accuracy = ((inputLength - mispelled) / inputLength) * 100;
+  console.log(`Time taken ${timeInSec.toFixed(2)}`);
+  console.log(`WPM ${WPM}`);
+  console.log(`Accuracy ${accuracy.toFixed(2)}`);
 }
