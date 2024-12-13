@@ -85,6 +85,8 @@ ParentElsetting.addEventListener('click', function (e) {
   addActiveSettings('.setting-display li', e);
   if (e.target.classList.contains('word-set')) {
     inputElement.focus();
+    inputElement.value = '';
+    ParentElconfig.innerHTML = '';
     ParentElconfig.insertAdjacentHTML(
       'afterbegin',
       `
@@ -94,7 +96,12 @@ ParentElsetting.addEventListener('click', function (e) {
           <li>100</li>
     `
     );
-    startText(10);
+    const activeConfigValue = document.querySelector(
+      '.setting-config li.active'
+    ).textContent;
+    console.log(activeConfigValue);
+
+    startText(Number(activeConfigValue));
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
