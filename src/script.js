@@ -97,33 +97,40 @@ const addActiveSettings = function (element, e) {
 const ParentElsetting = document.querySelector('.setting-display');
 const ParentElconfig = document.querySelector('.setting-config');
 
+const settingsConfigFunction = function (html) {
+  ParentElconfig.innerHTML = '';
+  ParentElconfig.insertAdjacentHTML('afterbegin', html);
+  const activeConfig = document.querySelector('.setting-config li.active');
+  const configValue = +activeConfig.textContent;
+  wordCount = configValue;
+  startText();
+};
+
 ParentElsetting.addEventListener('click', function (e) {
   addActiveSettings('.setting-display li', e);
   if (e.target.classList.contains('word-set')) {
-    inputElement.focus();
-    inputElement.value = '';
-    ParentElconfig.innerHTML = '';
-    ParentElconfig.insertAdjacentHTML(
-      'afterbegin',
-      `
-          <li class="word-config active">10</li>
+    const html = `  <li class="word-config active">10</li>
           <li class="word-config">25</li>
           <li class="word-config">50</li>
-          <li class="word-config">100</li>
-    `
-    );
-    const activeConfig = document.querySelector('.setting-config li.active');
-    const configValue = +activeConfig.textContent;
-    wordCount = configValue;
-    startText();
+          <li class="word-config">100</li>`;
+    settingsConfigFunction(html);
+  }
+  if (e.target.classList.contains('time-set')) {
+    const html = ` <li class="time-config active">10</li>
+          <li class="time-config">30</li>
+          <li class="time-config">60</li>
+          <li class="time-config">120</li>`;
+    settingsConfigFunction(html);
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
   addActiveSettings('.setting-config li', e);
-  const value = +e.target.textContent;
-  if (value) {
-    wordCount = value;
-    startText();
+  if (e.target.classList.contains('word-config')) {
+    const value = +e.target.textContent;
+    if (value) {
+      wordCount = value;
+      startText();
+    }
   }
 });
 const wpmText = document.querySelector('.wpm-res');
@@ -141,11 +148,10 @@ function displayResult(inputLength) {
   const WPM = Math.round(inputLength / standardOfTyping / timeInMin);
   // calculating the accuracy
   const accuracy = ((inputLength - mispelled) / inputLength) * 100;
-  console.log(`Time taken ${timeInSec.toFixed(2)}`);
-  console.log(`WPM ${WPM}`);
-  console.log(`Accuracy ${accuracy.toFixed(2)}`);
+
   wpmText.textContent = WPM;
   accuracyText.textContent = accuracy.toFixed(2);
-  timeText.textContent = timeInSec.toFixed(2);
+  timeText.textContent = timeInSec.toFixed(2) + 's';
+
   showResult.classList.remove('hidden');
 }
