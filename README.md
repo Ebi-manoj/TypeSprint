@@ -28,15 +28,27 @@ Here is a preview of the game interface:
 
 1. Clone the repository.
 
-   ```sh
+   ```
    git clone https://github.com/yourusername/TypeSprint.git
    ```
 
-2. cd TypeSprint
+2.
 
-3. npm install
+```
+ cd TypeSprint
+```
 
-4. npm run dev
+3.
+
+```
+ npm install
+```
+
+4.
+
+```
+ npm run dev
+```
 
 Open your browser and visit http://localhost:3000.
 
