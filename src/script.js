@@ -13,6 +13,7 @@ let wordCount = 10;
 let startedTime;
 let mispelled = 0;
 let timeOn = false;
+let timerStarted = false;
 let countDown;
 let timeFinished = false;
 let mispelledHistory = {};
@@ -53,6 +54,10 @@ const highlightText = function () {
       displayResult(userInput.length);
     }
   }
+  if (timeOn && userInput.length === targetText.length) {
+    displayResult(userInput.length);
+    timeFinished = false;
+  }
   if (timeOn && timeFinished) {
     displayResult(userInput.length);
     timeFinished = false;
@@ -69,6 +74,10 @@ const startText = function () {
     .map((char, index) => `<span id="char-${index}">${char}</span>`)
     .join('');
   inputElement.addEventListener('input', () => {
+    if (timeOn && !timerStarted) {
+      startTimer();
+      timerStarted = true;
+    }
     highlightText();
   });
   inputElement.value = '';
@@ -99,9 +108,7 @@ btnReset.forEach(btn =>
     inputElement.focus();
     inputElement.value = '';
     startText();
-    if (timeOn) {
-      startTimer();
-    }
+    timerStarted = false;
   })
 );
 //////////////////////////////////////////////////////////////
@@ -115,6 +122,7 @@ const addActiveSettings = function (element, e) {
 };
 const ParentElsetting = document.querySelector('.setting-display');
 const ParentElconfig = document.querySelector('.setting-config');
+const timerText = document.querySelector('.timer-text');
 
 const settingsConfigFunction = function (html) {
   ParentElconfig.innerHTML = '';
@@ -147,7 +155,6 @@ ParentElsetting.addEventListener('click', function (e) {
     wordCount = 25;
     countDown = 15;
     settingsConfigFunction(html);
-    startTimer();
   }
 });
 ParentElconfig.addEventListener('click', function (e) {
@@ -161,24 +168,25 @@ ParentElconfig.addEventListener('click', function (e) {
     const value = e.target.textContent;
     countDown = +value;
     startText();
-    startTimer();
   }
 });
 let timerInterval;
 const startTimer = function () {
   let remainingTime = countDown;
+  timerText.textContent = remainingTime;
+  timerText.style.visibility = 'visible';
 
   clearInterval(timerInterval);
 
   // Start the timer
   timerInterval = setInterval(() => {
+    remainingTime--;
     if (remainingTime > 0) {
-      console.log(`Time Left: ${remainingTime}s`);
-      remainingTime--;
+      timerText.textContent = remainingTime;
     } else {
       clearInterval(timerInterval);
       timeFinished = true;
-      console.log('Time Finished!');
+      timerText.style.visibility = 'hidden';
     }
   }, 1000);
 };
@@ -202,7 +210,7 @@ function displayResult(inputLength) {
 
   wpmText.textContent = WPM;
   accuracyText.textContent = accuracy.toFixed(2);
-  timeText.textContent = timeInSec.toFixed(2) + 's';
+  timeText.textContent = timeOn ? countDown + 's' : timeInSec.toFixed(2) + 's';
 
   showResult.classList.remove('hidden');
 }

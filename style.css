@@ -193,7 +193,7 @@ footer p span {
 
 /* .......RESULT WINDOW */
 .content-layout {
-  height: auto;
+  min-height: 250px;
   width: auto;
   position: relative;
 }
@@ -233,4 +233,12 @@ footer p span {
   font-size: 1rem;
   margin-left: 2rem;
   font-weight: 600;
+}
+
+.timer-text {
+  margin: 0 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: red;
+  visibility: hidden;
 }
